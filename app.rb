@@ -3,7 +3,7 @@ Bundler.require
 
 $:.unshift File.expand_path("./lib", __FILE__)
 $:.unshift File.expand_path("./db/", __FILE__)
-require 'app/scrapper'
+require 'app/scrapper.rb'
 #require 'emails.json'
 #require 'emails.csv'
 
