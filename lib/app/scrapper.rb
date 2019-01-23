@@ -24,7 +24,7 @@ require 'csv'
 #Program that scrap and save content from val d'oise townhall
 class Scrapper
 
-  @D=[]
+  @@D=[]
   @name = []
   @email = []
 
@@ -43,12 +43,12 @@ class Scrapper
       @name = node.text
       @email = get_townhall_email("http://annuaire-des-mairies.com/"+node["href"])
       end
-      @D = Hash[@names.zip(@email)]
+      @@D = Hash[@names.zip(@email)]
   end
 
 #Def to save datas into json
   def save_as_JSON
-    tempHash = @D.inject(:merge)
+    tempHash = @@D.inject(:merge)
     File.open("../../db/emails.json","w") do |f|
      f.write(tempHash.to_json)
     end
@@ -71,7 +71,7 @@ class Scrapper
 
 #Def to save datas into csv
   def save_as_csv
-    CSV.open("./db/#{@name}.csv", "wb") {|csv| @result_scrap.to_a.each {|elem| csv << elem} }
+    CSV.open("./db/#{@name}.csv", "wb") {|csv| @@D.to_a.each {|elem| csv << elem} }
   end
 # Perform to launch the program
   def perform
